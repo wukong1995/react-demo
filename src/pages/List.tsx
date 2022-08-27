@@ -1,36 +1,27 @@
-import React from 'react'
+import React, { memo } from 'react'
 
-class Item extends React.PureComponent {
-  render() {
-    const { item } = this.props
+const Item = memo((props) => {
+    const { item } = props
 
-    console.log('render call', item)
+    console.log('item render call')
     return (
       <div>
         {item}
       </div>
     )
-  }
-}
+});
 
-const style = { color: '#ddd' }
 
 class List extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { items: ['hello', 'world', 'click', 'me'] }
+    this.state = { items: [{id: 1, title: '2'}, {id: 2, title: '3'}] }
     this.handleAdd = this.handleAdd.bind(this)
   }
 
   handleAdd() {
-    const newItems = this.state.items
-    newItems.push(prompt('Enter some text'))
-    this.setState({ items: newItems })
-  }
-
-  handleRemove(i) {
-    const newItems = this.state.items.slice()
-    newItems.splice(i, 1)
+    const newItems = this.state.items;
+    newItems.forEach(item => item.title = 'wang')
     this.setState({ items: newItems })
   }
 
@@ -38,18 +29,12 @@ class List extends React.Component {
     return (
       <div>
         <button onClick={this.handleAdd}>Add Item</button>
-        {/* <ReactCSSTransitionGroup
-          transitionName="switch"
-          transitionEnterTimeout={500}
-          transitionLeaveTimeout={300}
-        > */}
         {
           this.state.items.map((item) => (
-            <Item key={item} item={item} style={style} />
+            <Item key={item} item={item} />
           ))
 
         }
-        {/* </ReactCSSTransitionGroup> */}
       </div>
     )
   }

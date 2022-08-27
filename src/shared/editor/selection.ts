@@ -40,7 +40,7 @@ Selection.prototype = {
   getCloneNodes() {
     return this.range.cloneContents().children
   },
-  createRangeByElem($elem, toStart, isContent) {
+  createRangeByElem($elem: any, toStart: boolean, isContent: boolean) {
     // $elem - 经过封装的 elem
     // toStart - true 开始位置，false 结束位置
     // isContent - 是否选中Elem的内容
